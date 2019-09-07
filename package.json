@@ -1,0 +1,22 @@
+{
+  "name": "mazopolis-cli",
+  "version": "1.0.0",
+  "description": "Mazopolis CLI",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mazopolis/mazopolis-cli.git"
+  },
+  "keywords": [
+    "mazopolis"
+  ],
+  "author": "MoonBarc",
+  "license": "SEE LICENCE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/Mazopolis/mazopolis-cli/issues"
+  },
+  "homepage": "https://github.com/Mazopolis/mazopolis-cli#readme"
+}
