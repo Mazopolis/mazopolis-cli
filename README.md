@@ -2,7 +2,7 @@
 THIS WILL NOT WORK!!! DON'T TRY!!!
 
 # Installation (soon)
-Install node and npm from https://nodejs.org>.
+Install node and npm from https://nodejs.org.
 Then, you can make sure you have it by running `npm -v` and `node -v`.
 
 After, you can run:
