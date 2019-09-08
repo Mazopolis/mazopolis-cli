@@ -18,5 +18,12 @@
   "bugs": {
     "url": "https://github.com/Mazopolis/mazopolis-cli/issues"
   },
-  "homepage": "https://github.com/Mazopolis/mazopolis-cli#readme"
+  "homepage": "https://github.com/Mazopolis/mazopolis-cli#readme",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "clear": "^0.1.0",
+    "clui": "^0.3.6",
+    "figlet": "^1.2.4",
+    "inquirer": "^7.0.0"
+  }
 }
