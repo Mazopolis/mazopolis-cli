@@ -6,6 +6,9 @@
   "scripts": {
     "test": "node test.js"
   },
+  "bin": {
+    "mzr": "./index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Mazopolis/mazopolis-cli.git"

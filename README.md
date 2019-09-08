@@ -1,9 +1,20 @@
-## WARNING
-THIS WILL NOT WORK!!! DON'T TRY!!!
+# Installation
+The best way to install this is with npm.
+`npm i mazopolis-cli -g`
 
-# Installation (soon)
-Install node and npm from https://nodejs.org.
-Then, you can make sure you have it by running `npm -v` and `node -v`.
+# What on earth is this thing???
+This is the easiest way to install the software that powers Mazopolis Multiplayer.
 
-After, you can run:
-`npm i mazopolis-cli`
+# How
+After you have installed it, run
+`mzr`
+It will ask you questions and ask you to set it up.
+After, you're done!
+Make sure to get an ssl certificate from Let's Encrypt and plop it inside of the ssl-cert folder.
+
+## When will this be supported on Mazopolis.com?
+Very soon. :)
+
+# Notice
+This is my first ever NPM package. If I did anything wrong, tell me on GitHub here:
+https://github.com/Mazopolis/mazopolis-cli
