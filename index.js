@@ -5,6 +5,7 @@ const chalk = require('chalk');
 const clear = require('clear');
 const figlet = require('figlet');
 const fs = require("fs")
+const app = require("express")()
 const readline = require("readline")
 const mkdirp = require('mkdirp');
 const git = require("simple-git")(process.cwd())
@@ -23,7 +24,6 @@ const rl = readline.createInterface({
 
 let answers = {
     servname: undefined,
-    owner: undefined,
     security: {
         token: undefined
     }
@@ -32,9 +32,29 @@ let answers = {
 rl.question("[" + chalk.blueBright("SERVER NAME") + "] >> ",answer => {
     rl.close()
     answers.servname = answer
-    console.log(chalk.green("Done! Now let's talk security. Mazopolis requires a secure connection, so your going to need one of those fancy SSL certificates! Thankfully we know where to get one. Head over to Let's Encrypt to generate a certificate. (https://letsencrypt.org). If you have your own certificate, you can use that. Now to the fun part! Would you like to install the server?"))
-    yn()
-    
+    console.log(chalk.blueBright("Go to the following link to signin:"))
+    console.log(chalk.green("https://test.mazopolis.com/cli-login"))
+    var httpserver = app.listen(4837, () => console.log(chalk.blueBright("Waiting for authentication...")))
+    var done = false
+    app.get("**",(req,res) => {
+        var token = req.query.token
+        if(token) {
+            if(done) {
+                res.send("Well no.")
+            }else{
+                done = true
+                answers.security.token = token
+                console.log(chalk.green("Recieved authentication token!"))
+                httpserver.close()
+                res.send("Success! Now go back to the CLI.")
+                console.log(chalk.yellow("Are you sure that you would like to install the Mazopolis Server?"))
+                yn()
+            }
+        }else{
+            res.status(400)
+            res.send("whoops. that doesn't look like a token. well, i guess it doesn't look like anything either.")
+        }
+    })
 })
 
 function yn() {
@@ -44,13 +64,13 @@ function yn() {
     });
     rl2.question("[" + chalk.green("YES") + " or " + chalk.red("NO") + "] >> ",answer => {
         rl2.close()
-        if(answer.toLowerCase() == "yes") {
+        if(answer.toLowerCase() == "yes" || answer.toLowerCase() == "y") {
             console.log(chalk.green("Done! Make sure you put your certificate into the ssl-cert folder. Run the server via node index.js."))
             installServer()
-        }else if(answer.toLowerCase() == "no"){
+        }else if(answer.toLowerCase() == "no" || answer.toLowerCase() == "n"){
             console.log(chalk.blueBright("aw man! maybe next time?"))
         }else{
-            console.log(chalk.blueBright("YES OR NO!!!!"))
+            console.log(chalk.blueBright("YES OR NO!???!!!!"))
             yn()
         }
     })
@@ -59,7 +79,7 @@ function yn() {
 function installServer() {
     fs.writeFile('server.json', JSON.stringify(answers), function (err) {
         if (err) throw err;
-        console.log('Created config. Prepping to install server!');
+        console.log(chalk.yellow('Created config. Prepping to install server!'));
         git.clone("https://github.com/Mazopolis/Mazopolis-Multiplayer-Server.git",() => {
             fs2.move(process.cwd() + '/Mazopolis-Multiplayer-Server', process.cwd() + "/mzr-server", err => {
                 if(err) return console.error(err);
@@ -68,7 +88,9 @@ function installServer() {
                         if(err) {
                             console.error(err)
                         }else{
-                            console.log(chalk.green('success!'));
+                            console.log(chalk.green('Success!'));
+                            console.log(chalk.red("IMPORTANT: ") + chalk.blueBright("Please put a valid SSL Certificate inside of the ssl-cert folder."))
+                            process.exit()
                         }
                     });
                 })
