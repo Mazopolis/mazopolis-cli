@@ -29,31 +29,29 @@ let answers = {
     }
 }
 
-rl.question("[SERVER NAME] >> ",answer => {
+rl.question("[" + chalk.blueBright("SERVER NAME") + "] >> ",answer => {
     rl.close()
     answers.servname = answer
-    console.log(chalk.green("Done! Now let's talk security. Mazopolis requires a secure connection, so your going to need one of those fancy SSL certificates! Thankfully we know where to get one. If you have your own certificate, you can skip this step by saying skip."))
+    console.log(chalk.green("Done! Now let's talk security. Mazopolis requires a secure connection, so your going to need one of those fancy SSL certificates! Thankfully we know where to get one. Head over to Let's Encrypt to generate a certificate. (https://letsencrypt.org). If you have your own certificate, you can use that. Now to the fun part! Would you like to install the server?"))
     yn()
     
 })
 
 function yn() {
-    mkdirp(process.cwd() + "/ssl-cert", function(err) { 
-        if(err) {
-            console.error(err)
-        }
-    });
     const rl2 = readline.createInterface({
         input: process.stdin,
         output: process.stdout
     });
-    rl2.question("[YES or SKIP] >> ",answer => {
+    rl2.question("[" + chalk.green("YES") + " or " + chalk.red("NO") + "] >> ",answer => {
         rl2.close()
-        if(answer.toLowerCase() == "skip") {
+        if(answer.toLowerCase() == "yes") {
             console.log(chalk.green("Done! Make sure you put your certificate into the ssl-cert folder. Run the server via node index.js."))
             installServer()
+        }else if(answer.toLowerCase() == "no"){
+            console.log(chalk.blueBright("aw man! maybe next time?"))
         }else{
-            console.log(answer)
+            console.log(chalk.blueBright("YES OR NO!!!!"))
+            yn()
         }
     })
 }
@@ -65,9 +63,15 @@ function installServer() {
         git.clone("https://github.com/Mazopolis/Mazopolis-Multiplayer-Server.git",() => {
             fs2.move(process.cwd() + '/Mazopolis-Multiplayer-Server', process.cwd() + "/mzr-server", err => {
                 if(err) return console.error(err);
-                console.log('success!');
-            }).then(() => {
-                fs2.move(process.cwd() + "/server.json",process.cwd() + "/mzr-server")
+                fs2.move(process.cwd() + "/server.json",process.cwd() + "/mzr-server/server.json",() => {
+                    mkdirp(process.cwd() + "/mzr-server/ssl-cert", function(err) { 
+                        if(err) {
+                            console.error(err)
+                        }else{
+                            console.log(chalk.green('success!'));
+                        }
+                    });
+                })
             })
         })
     });
