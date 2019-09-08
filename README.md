@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/Mazopolis/mazopolis-cli.svg?style=svg)](https://circleci.com/gh/Mazopolis/mazopolis-cli)
+
 # Installation
 The best way to install this is with npm.
 `npm i mazopolis-cli -g`
