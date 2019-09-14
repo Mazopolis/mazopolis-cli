@@ -4,6 +4,8 @@
 The best way to install this is with npm.
 `npm i mazopolis-cli -g`
 
+[More Info](https://github.com/Mazopolis/mazopolis-cli/wiki/Installation)
+
 # What on earth is this thing???
 This is the easiest way to install the software that powers Mazopolis Multiplayer.
 
