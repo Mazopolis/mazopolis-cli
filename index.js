@@ -69,6 +69,7 @@ function yn() {
             installServer()
         }else if(answer.toLowerCase() == "no" || answer.toLowerCase() == "n"){
             console.log(chalk.blueBright("aw man! maybe next time?"))
+            process.exit()
         }else{
             console.log(chalk.blueBright("YES OR NO!???!!!!"))
             yn()
