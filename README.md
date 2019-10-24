@@ -1,3 +1,6 @@
+# NOTICE
+This repositry is archived. This software will not work with mazopolis anymore (well it never did so....). Sorry!
+
 [![CircleCI](https://circleci.com/gh/Mazopolis/mazopolis-cli.svg?style=svg)](https://circleci.com/gh/Mazopolis/mazopolis-cli)
 
 # Installation
@@ -19,7 +22,10 @@ Make sure to get an ssl certificate from https://letsencrypt.org (or any other p
 ## When will this be supported on Mazopolis.com?
 Very soon. :)
 We are still working on the software though, so it's not ready for release **yet**, so stay tuned!
+Update 10/23/19:
+maybe some day, but not anytime soon.
 
 # Notice
 This is my first ever NPM package. If I did anything wrong, tell me on GitHub here:
 https://github.com/Mazopolis/mazopolis-cli
+no don't this is archived
